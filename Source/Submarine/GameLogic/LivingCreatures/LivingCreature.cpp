@@ -3,6 +3,7 @@
 
 #include "LivingCreature.h"
 #include "Components/SphereComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Submarine/GameplayBase/SubmarineGameInstance.h"
 
 // Sets default values
@@ -74,10 +75,11 @@ void ALivingCreature::CreatureInit()
 void ALivingCreature::HealthInfluenceEvent()
 {
 	Health += HealthInfluenceTickValue * CurrentHealthInfluence;
-	if (Health < 0)
+	UKismetMathLibrary::Clamp(Health,0,2);
+	/*if (Health < 0)
 		Health = 0;
 	else if (Health > 2)
-		Health = 2;
+		Health = 2;*/
 
 	UpdateHealthState();
 }
